@@ -4,7 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 const helpers = require('./helpers');
 const PORT = 8000;
-const RESULTS_LIMIT = 100;
+const RESULTS_LIMIT = 50;
 
 const app = express();
 
@@ -41,7 +41,7 @@ app.post('/generate-report', async (req, res) => {
 
 		var googleSearchUrl = `https://www.google.com/search?q=${keyword}&tbm=nws&tbs=qdr:d,lang_1ro&lr=lang_ro&sa=X&num=${RESULTS_LIMIT}`;
 
-		// console.log('googleSearchUrl', googleSearchUrl);
+		console.log('googleSearchUrl', googleSearchUrl);
 
 		await helpers
 			.getGoogleNewsHeadlines(googleSearchUrl)
