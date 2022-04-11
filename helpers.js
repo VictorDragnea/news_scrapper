@@ -102,9 +102,21 @@ const writeArticleToWordDocument = async (data) => {
 	console.log('IntraaaAAAAaa');
 	let documentName = getDocumentName();
 
-	fs.writeFile(documentName, '', function (err) {
-		if (err) throw err;
-	});
+	const path = `./reports/${documentName}`;
+
+	if (fs.existsSync(path)) {
+		// path exists
+		try {
+			fs.unlinkSync(path);
+			//file removed
+		} catch (err) {
+			console.error(err);
+		}
+	}
+
+	// fs.writeFile(path, '', function (err) {
+	// 	if (err) throw err;
+	// });
 
 	let storage = '';
 	let index = 0;
@@ -137,7 +149,7 @@ const writeArticleToWordDocument = async (data) => {
 
 	var converted = await HtmlDocx.asBlob(storage);
 
-	var logger = fs.createWriteStream(documentName, {
+	var logger = fs.createWriteStream(path, {
 		flags: 'a', // 'a' means appending (old data will be preserved)
 		// encoding: 'utf-8',
 	});
