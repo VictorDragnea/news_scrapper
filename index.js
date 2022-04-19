@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 const helpers = require('./public/js/helpers');
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 const RESULTS_LIMIT = 50;
 
 const app = express();
